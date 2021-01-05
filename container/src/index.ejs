@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quasar Single SPA</title>
+
+    <meta name="importmap-type" content="systemjs-importmap"/>
+    <script type="systemjs-importmap" src="/src/importmap.json"></script>
+
+<!--    <script type="systemjs-importmap" src="./src/importmap.json"></script>-->
+    <% if (isLocal) { %>
+        <script type="systemjs-importmap">
+            {
+              "imports": {
+                "root-config": "//localhost:9000/root-config.js"
+              }
+            }
+        </script>
+    <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides/dist/import-map-overrides.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.8.1/system.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.8.1/extras/amd.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@^5.0.0/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/ionicons@^4.0.0/dist/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/eva-icons@^1.0.0/style/eva-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://themify.me/wp-content/themes/themify-v32/themify-icons/themify-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@^4.0.0/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@1.14.7/dist/quasar.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<script>
+  System.import('root-config');
+</script>
+
+<div id="q-app"></div>
+
+<import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "imports": {
+    "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.8.2/lib/system/single-spa.min.js",
+    "single-spa-vue": "https://cdn.jsdelivr.net/npm/single-spa-vue@2.1.0/dist/umd/single-spa-vue.min.js",
+    "vue": "https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js",
+    "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@3.4.9/dist/vue-router.min.js",
+    "axios": "https://cdn.jsdelivr.net/npm/axios@0.21.0/dist/axios.min.js",
+    "quasar": "https://cdn.jsdelivr.net/npm/quasar@1.14.7/dist/quasar.common.min.js",
+
+    "@my/application": "https://localhost:8080/app.js",
+    "@my/application/": "https://localhost:8080/"
+  }
+}
