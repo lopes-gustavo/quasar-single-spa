@@ -1,67 +1,46 @@
 const path = require('path')
+const cors = require('cors')
 const { name } = require('./package')
 const SystemJSPublicPathWebpackPlugin = require('systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin')
-
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const webpack = require('webpack')
 
 function resolve (...dirs) {
   return path.join(__dirname, ...dirs)
 }
 
-module.exports = function (ctx) {
+module.exports = function () {
   return {
-    boot: [
-    ],
-
     css: [
       'app.sass'
     ],
 
-    extras: [
+    extras: [ // Optional extras you may have
       'fontawesome-v5',
       'roboto-font',
       'material-icons'
     ],
 
     framework: {
-      iconSet: 'fontawesome-v5',
-      lang: 'pt-br',
-      // all: true,
-
-      plugins: [
-        'Notify',
-        'Loading',
-        'LocalStorage',
-        'Dialog'
-      ]
-    },
-
-    htmlVariables: {
-      buildDate: new Date().toISOString(),
-      version: process.env.VERSION || '0.0.1'
+      iconSet: 'fontawesome-v5'
     },
 
     vendor: {
-      disable: true
+      disable: true // Makes bundler smaller
     },
 
     build: {
       vueRouterBase: 'app', // must be the same as the container "activeWhen"
       vueRouterMode: 'history',
-      env: {
-      },
       scopeHoisting: true,
       chainWebpack (config) {
-        config.entry('app').add(resolve('src', 'single-spa-entry.js'))
+        config.entry('app').add(resolve('src', 'single-spa-entry.js')) // This is the magic to make quasar work with single-spa
       },
       extendWebpack (cfg) {
-        cfg.output = {
+        cfg.output = { // As per single-spa documentation
           library: `${name}-[name]`,
           libraryTarget: 'umd',
           jsonpFunction: `webpackJsonp_${name}`
         }
-        cfg.externals = [ // Dependencies that will be provided by the container
+        cfg.externals = [ // [OPTIONAL] Dependencies that will be provided by the container
           'quasar',
           '@quasar/extras',
           'vue',
@@ -71,8 +50,6 @@ module.exports = function (ctx) {
           'single-spa-vue'
         ]
 
-        // cfg.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'static' }))
-        // cfg.plugins.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }))
         cfg.plugins.push(new SystemJSPublicPathWebpackPlugin({ systemjsModuleName: name }))
         cfg.module.rules.push({
           enforce: 'pre',
@@ -90,7 +67,6 @@ module.exports = function (ctx) {
       https: true, // Important if want to use hot reload. You MUST navigate to https://localhost:8080/app.js and bypass invalid certificate warning. Otherwise it won't work
       disableHostCheck: true,
       before (app) {
-        const cors = require('cors')
         app.use(cors())
       }
     }
